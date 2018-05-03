@@ -33,7 +33,7 @@ class m180503_050717_create_teachers_table extends Migration
     public function safeDown()
     {
         $this->dropForeignKey(
-            'fk-post-participantId',
+            'fk-teachers-participantId',
             '{{%teachers}}'
         );
         $this->dropTable('teachers');
