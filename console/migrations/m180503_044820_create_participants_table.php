@@ -36,6 +36,10 @@ class m180503_044820_create_participants_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey(
+            'fk-post-schoolId',
+            '{{%participants}}'
+        );
         $this->dropTable('{{%participants}}');
     }
 }
