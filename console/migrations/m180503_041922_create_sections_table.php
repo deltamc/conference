@@ -31,6 +31,11 @@ class m180503_041922_create_sections_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropIndex(
+            'idx-sections-parentId',
+            '{{%sections}}'
+        );
         $this->dropTable('{{%sections}}');
+
     }
 }
