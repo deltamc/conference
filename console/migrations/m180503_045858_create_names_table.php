@@ -19,7 +19,7 @@ class m180503_045858_create_names_table extends Migration
         ]);
 
         $this->addForeignKey(
-            'fk-post-participantId',
+            'fk-names-participantId',
             '{{%names}}',
             'participantId',
             '{{%participants}}',
@@ -33,7 +33,7 @@ class m180503_045858_create_names_table extends Migration
     public function safeDown()
     {
         $this->dropForeignKey(
-            'fk-post-participantId',
+            'fk-names-participantId',
             '{{%names}}'
         );
         $this->dropTable('{{%names}}');
