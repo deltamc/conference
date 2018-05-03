@@ -36,6 +36,6 @@ class m180503_050717_create_teachers_table extends Migration
             'fk-teachers-participantId',
             '{{%teachers}}'
         );
-        $this->dropTable('teachers');
+        $this->dropTable('{{%teachers}}');
     }
 }
