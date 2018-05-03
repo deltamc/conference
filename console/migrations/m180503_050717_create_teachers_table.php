@@ -19,7 +19,7 @@ class m180503_050717_create_teachers_table extends Migration
         ]);
 
         $this->addForeignKey(
-            'fk-post-participantId',
+            'fk-teachers-participantId',
             '{{%teachers}}',
             'participantId',
             '{{%participants}}',
