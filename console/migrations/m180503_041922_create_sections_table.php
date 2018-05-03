@@ -18,6 +18,12 @@ class m180503_041922_create_sections_table extends Migration
             'type'     => "ENUM('section', 'subsection', 'age_group')",
             'parentId' => $this->integer()->notNull(),
         ]);
+
+        $this->createIndex(
+            'idx-sections-parentId',
+            '{{%sections}}',
+            'parentId'
+        );
     }
 
     /**
