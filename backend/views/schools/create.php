@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Schools */
 
-$this->title = 'Create Schools';
-$this->params['breadcrumbs'][] = ['label' => 'Schools', 'url' => ['index']];
+$this->title = 'Добавление учебного заведения';
+$this->params['breadcrumbs'][] = ['label' => 'Учебные заведения', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schools-create">
