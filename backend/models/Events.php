@@ -2,7 +2,7 @@
 
 namespace backend\models;
 use  \yii\behaviors\TimeStampBehavior;
-use Yii\db\ActiveRecord;
+use \yii\db\ActiveRecord;
 use Yii;
 
 /**
