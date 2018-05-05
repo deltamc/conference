@@ -1,7 +1,8 @@
 <?php
 
 namespace backend\models;
-
+use  \yii\behaviors\TimeStampBehavior;
+use Yii\db\ActiveRecord;
 use Yii;
 
 /**
@@ -12,7 +13,7 @@ use Yii;
  * @property int $dataStartReg
  * @property int $dataEndReg
  */
-class Events extends \yii\db\ActiveRecord
+class Events extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -29,8 +30,25 @@ class Events extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'dataStartReg', 'dataEndReg'], 'required'],
-            [['dataStartReg', 'dataEndReg'], 'integer'],
+            [['dataStartReg', 'dataEndReg'], 'date', 'format'=>'php:d.m.Y H:i:s'],
             [['name'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'dataStartReg',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'dataEndReg',
+                ],
+                'value' => function() { return date('U'); },
+            ],
         ];
     }
 
@@ -40,10 +58,10 @@ class Events extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'dataStartReg' => 'Data Start Reg',
-            'dataEndReg' => 'Data End Reg',
+            'id'           => 'ID',
+            'name'         => 'Мероприятия ',
+            'dataStartReg' => 'Дата начала регистрации',
+            'dataEndReg'   => 'Дата окончания регистрации',
         ];
     }
 }
