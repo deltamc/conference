@@ -7,6 +7,7 @@ use kartik\datetime\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Events */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="events-form">
@@ -15,25 +16,31 @@ use kartik\datetime\DateTimePicker;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+
+
     <?= $form->field($model, 'dataStartReg')->widget(DateTimePicker::class, [
-        'name' => 'dataStartReg',
-        //'options' => ['placeholder' => 'Select operating time ...'],
+        'name'    => 'dataStartReg',
+        'options' => [
+            'value' => $model->getDataStartReg(),
+        ],
         'convertFormat' => true,
         'pluginOptions' => [
-            'format' => 'php:d.m.Y h:i:s',
-            'startDate' => date('d.m.Y h:i:s'),
-            'todayHighlight' => true
+            'format'         => Yii::$app->formatter->datetimeFormat,
+            'todayHighlight' => true,
+            'autoclose' => true,
     ]]); ?>
 
 
     <?= $form->field($model, 'dataEndReg')->widget(DateTimePicker::class, [
         'name' => 'dataEndReg',
-        //'options' => ['placeholder' => 'Select operating time ...'],
         'convertFormat' => true,
+        'options' => [
+            'value' => $model->getDataEndReg(),
+        ],
         'pluginOptions' => [
-            'format' => 'php:d.m.Y h:i:s',
-            'startDate' => date('d.m.Y h:i:s'),
-            'todayHighlight' => true
+            'format'         => Yii::$app->formatter->datetimeFormat,
+            'todayHighlight' => true,
+            'autoclose' => true,
         ]]); ?>
 
     <div class="form-group">

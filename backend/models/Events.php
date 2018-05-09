@@ -4,7 +4,7 @@ namespace backend\models;
 use  \yii\behaviors\TimeStampBehavior;
 use \yii\db\ActiveRecord;
 use Yii;
-
+use yii\behaviors\AttributeBehavior;
 /**
  * This is the model class for table "{{%events}}".
  *
@@ -15,6 +15,7 @@ use Yii;
  */
 class Events extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -30,27 +31,23 @@ class Events extends ActiveRecord
     {
         return [
             [['name', 'dataStartReg', 'dataEndReg'], 'required'],
-            [['dataStartReg', 'dataEndReg'], 'date', 'format'=>'php:d.m.Y H:i:s'],
+            [
+                ['dataStartReg'],
+                'datetime',
+                'format'             => Yii::$app->formatter->datetimeFormat,
+                'timestampAttribute' => 'dataStartReg'
+            ],
+            [
+                ['dataEndReg'],
+                'datetime',
+                'format'             => Yii::$app->formatter->datetimeFormat,
+                'timestampAttribute' => 'dataEndReg'
+            ],
             [['name'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'dataStartReg',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'dataEndReg',
-                ],
-                'value' => function() { return date('U'); },
-            ],
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -64,4 +61,25 @@ class Events extends ActiveRecord
             'dataEndReg'   => 'Дата окончания регистрации',
         ];
     }
+
+    public function getDataStartReg()
+    {
+
+        if (!empty($this->dataStartReg)) {
+            return Yii::$app->formatter->asDatetime($this->dataStartReg, Yii::$app->formatter->datetimeFormat);
+        }
+
+        return '';
+    }
+
+    public function getDataEndReg()
+    {
+        if (!empty($this->dataEndReg)) {
+            return Yii::$app->formatter->asDatetime($this->dataEndReg, Yii::$app->formatter->datetimeFormat);
+        }
+
+        return '';
+    }
+
+
 }
