@@ -12,7 +12,12 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
 
-    'modules' => [],
+    'modules' => [
+        'treemanager' =>  [
+            'class' => '\kartik\tree\Module',
+            // other module settings, refer detailed documentation
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
