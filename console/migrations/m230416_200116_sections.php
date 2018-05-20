@@ -15,9 +15,9 @@ use yii\db\Migration;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class m230416_200116_tree extends Migration
+class m230416_200116_sections extends Migration
 {
-    const TABLE_NAME = '{{%tree}}';
+    const TABLE_NAME = '{{%sections}}';
 
     /**
      * @inheritdoc
