@@ -48,7 +48,8 @@ class m230416_200116_tree extends Migration
             'movable_l' => $this->boolean()->notNull()->defaultValue(true),
             'movable_r' => $this->boolean()->notNull()->defaultValue(true),
             'removable' => $this->boolean()->notNull()->defaultValue(true),
-            'removable_all' => $this->boolean()->notNull()->defaultValue(false)
+            'removable_all' => $this->boolean()->notNull()->defaultValue(false),
+            'type'     => "ENUM('section', 'subsection', 'age_group')",
         ], $tableOptions);
         $this->createIndex('tree_NK1', self::TABLE_NAME, 'root');
         $this->createIndex('tree_NK2', self::TABLE_NAME, 'lft');
