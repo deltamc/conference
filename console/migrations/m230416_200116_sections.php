@@ -49,13 +49,15 @@ class m230416_200116_sections extends Migration
             'movable_r' => $this->boolean()->notNull()->defaultValue(true),
             'removable' => $this->boolean()->notNull()->defaultValue(true),
             'removable_all' => $this->boolean()->notNull()->defaultValue(false),
-            'type'     => "ENUM('section', 'subsection', 'age_group')",
+            'type' => "ENUM('section', 'subsection', 'age_group')",
+            'eventId' => $this->integer()->notNull(),
         ], $tableOptions);
         $this->createIndex('tree_NK1', self::TABLE_NAME, 'root');
         $this->createIndex('tree_NK2', self::TABLE_NAME, 'lft');
         $this->createIndex('tree_NK3', self::TABLE_NAME, 'rgt');
         $this->createIndex('tree_NK4', self::TABLE_NAME, 'lvl');
         $this->createIndex('tree_NK5', self::TABLE_NAME, 'active');
+        $this->createIndex('tree_NK6', self::TABLE_NAME, 'eventId');
     }
 
 
