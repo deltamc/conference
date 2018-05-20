@@ -14,7 +14,7 @@ class Section extends \kartik\tree\models\Tree
         return '{{%sections}}';
     }
 
-    public function getTypes()
+    public static function getTypes()
     {
         return [
             'section'    => 'Секция',

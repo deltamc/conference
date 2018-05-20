@@ -3,8 +3,8 @@ namespace backend\controllers;
 
 class SectionsController extends \yii\web\Controller {
 
-    public function actionIndex()
+    public function actionIndex($event)
     {
-        return $this->render('index');
+        return $this->render('index', ['event' => $event]);
     }
 }
