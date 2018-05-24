@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%participants}}".
@@ -21,6 +22,8 @@ use Yii;
  */
 class Participant extends \yii\db\ActiveRecord
 {
+
+
     /**
      * {@inheritdoc}
      */
@@ -39,6 +42,8 @@ class Participant extends \yii\db\ActiveRecord
             [['schoolId'], 'integer'],
             [['schoolName', 'additionalSchool', 'class', 'theme', 'contacts'], 'string', 'max' => 255],
             [['schoolId'], 'exist', 'skipOnError' => true, 'targetClass' => Schools::className(), 'targetAttribute' => ['schoolId' => 'id']],
+
+
         ];
     }
 
@@ -55,6 +60,7 @@ class Participant extends \yii\db\ActiveRecord
             'class' => 'Class',
             'theme' => 'Theme',
             'contacts' => 'Contacts',
+
         ];
     }
 
@@ -89,5 +95,20 @@ class Participant extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ParticipantsQuery(get_called_class());
+    }
+
+    public function saveNames(array $names)
+    {
+        //Name::deleteAll(['participantId' => $this->id]);
+
+        foreach ($names as $name)
+        {
+            $model = new Name();
+            $model->name = $name;
+            $model->participantId = $this->id;
+            $model->save();
+        }
+
+        return true;
     }
 }

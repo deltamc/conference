@@ -4,10 +4,13 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Participant;
+use backend\models\Name;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;
+use yii\base\Model;
 
 /**
  * ParticipantController implements the CRUD actions for Participant model.
@@ -67,6 +70,7 @@ class ParticipantsController extends Controller
         $model = new Participant();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->saveNames();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -84,9 +88,13 @@ class ParticipantsController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $names = Yii::$app->request->post('Participant', [])['names']['name'];
+            $model->saveNames($names);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

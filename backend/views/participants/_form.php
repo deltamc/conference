@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use unclead\multipleinput\MultipleInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Participant */
@@ -11,6 +12,25 @@ use yii\widgets\ActiveForm;
 <div class="participant-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+
+    <?= $form->field($model, 'names')->widget(MultipleInput::className(), [
+        'max'               => 6,
+        'allowEmptyList'    => false,
+        'enableGuessTitle'  => true,
+        //'addButtonPosition' => MultipleInput::POS_HEADER, // show add button in the header
+        'columns' => [
+            [
+                'title' => 'Имя',
+                'name' => 'name',
+                'type' => 'textInput'
+            ],
+        ],
+        'addButtonOptions' => ['label' => 'Добавить соавтора']
+    ])
+        ->label(false);
+
+    ?>
 
     <?= $form->field($model, 'schoolId')->textInput() ?>
 

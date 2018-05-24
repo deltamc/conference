@@ -32,7 +32,7 @@ class Name extends \yii\db\ActiveRecord
             [['name', 'participantId'], 'required'],
             [['participantId'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['participantId'], 'exist', 'skipOnError' => true, 'targetClass' => Participants::className(), 'targetAttribute' => ['participantId' => 'id']],
+            [['participantId'], 'exist', 'skipOnError' => true, 'targetClass' => Participant::className(), 'targetAttribute' => ['participantId' => 'id']],
         ];
     }
 
@@ -53,7 +53,7 @@ class Name extends \yii\db\ActiveRecord
      */
     public function getParticipant()
     {
-        return $this->hasOne(Participants::className(), ['id' => 'participantId']);
+        return $this->hasOne(Participant::className(), ['id' => 'participantId']);
     }
 
     /**
