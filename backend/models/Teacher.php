@@ -53,7 +53,7 @@ class Teacher extends \yii\db\ActiveRecord
      */
     public function getParticipant()
     {
-        return $this->hasOne(Participants::className(), ['id' => 'participantId']);
+        return $this->hasOne(Participant::className(), ['id' => 'participantId']);
     }
 
     /**
