@@ -32,7 +32,7 @@ class Teacher extends \yii\db\ActiveRecord
             [['name', 'participantId'], 'required'],
             [['participantId'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['participantId'], 'exist', 'skipOnError' => true, 'targetClass' => Participants::className(), 'targetAttribute' => ['participantId' => 'id']],
+            [['participantId'], 'exist', 'skipOnError' => true, 'targetClass' => Participant::className(), 'targetAttribute' => ['participantId' => 'id']],
         ];
     }
 
