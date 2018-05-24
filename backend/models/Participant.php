@@ -63,7 +63,7 @@ class Participant extends \yii\db\ActiveRecord
      */
     public function getNames()
     {
-        return $this->hasMany(Names::className(), ['participantId' => 'id']);
+        return $this->hasMany(Name::className(), ['participantId' => 'id']);
     }
 
     /**
@@ -79,7 +79,7 @@ class Participant extends \yii\db\ActiveRecord
      */
     public function getTeachers()
     {
-        return $this->hasMany(Teachers::className(), ['participantId' => 'id']);
+        return $this->hasMany(Teacher::className(), ['participantId' => 'id']);
     }
 
     /**
