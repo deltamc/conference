@@ -4,8 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+
 class Section extends \kartik\tree\models\Tree
 {
+
     /**
      * @inheritdoc
      */
@@ -30,6 +32,7 @@ class Section extends \kartik\tree\models\Tree
     {
         $rules = parent::rules();
         $rules[] = ['type', 'string'];
+        $rules[] = ['eventId', 'integer'];
         return $rules;
     }
 
