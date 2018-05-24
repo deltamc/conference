@@ -15,9 +15,9 @@ use Yii;
  * @property string $theme
  * @property string $contacts
  *
- * @property Names[] $names
+ * @property Name[] $names
  * @property Schools $school
- * @property Teachers[] $teachers
+ * @property Teacher[] $teachers
  */
 class Participant extends \yii\db\ActiveRecord
 {
