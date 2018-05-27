@@ -6,7 +6,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Participants';
+$this->title = 'Участники';
+$this->params['breadcrumbs'][] = $eventModel->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="participant-index">
