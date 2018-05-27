@@ -114,7 +114,7 @@ $script = <<< JS
      function fSchoolnameHideShow(val)
      {
          var fSchoolname =  jQuery('.field-participant-schoolname');
-         if (val != 0) {
+         if (parseInt(val) !== 0) {
             fSchoolname.hide();
             fSchoolname.find('input').prop('required', false);
          } else {

@@ -79,6 +79,7 @@ class ParticipantsController extends Controller
         $post = Yii::$app->request->post();
 
         $schools = ArrayHelper::map(Schools::find()->all(), 'id', 'name');
+        $schools[0] = 'Другое';
 
         if ($model->load($post) && $model->save()) {
 
@@ -165,7 +166,7 @@ class ParticipantsController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'event' => (int) $event]);
     }
 
     /**
