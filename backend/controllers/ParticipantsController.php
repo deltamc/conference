@@ -95,7 +95,7 @@ class ParticipantsController extends Controller
             $model->saveNames($names);
             $model->saveTeachers($teachers);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'event' => $eventModel->id]);
         }
 
         return $this->render('create', [
@@ -142,7 +142,7 @@ class ParticipantsController extends Controller
             $model->saveNames($names);
             $model->saveTeachers($teachers);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'event' => $eventModel->id]);
         }
 
         return $this->render('update', [
