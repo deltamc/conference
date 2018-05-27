@@ -6,8 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Participant */
 
-$this->title = 'Create Participant';
-$this->params['breadcrumbs'][] = ['label' => 'Participants', 'url' => ['index']];
+$this->title = 'Добавление участника ';
+$this->params['breadcrumbs'][] = $eventModel->name;
+$this->params['breadcrumbs'][] = ['label' => 'Участники', 'url' => ['/participants', 'event'=> $eventModel->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="participant-create">
