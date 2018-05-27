@@ -38,6 +38,7 @@ class ParticipantsController extends Controller
      * Lists all Participant models.
      * @param integer $event
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionIndex($event)
     {
@@ -64,6 +65,7 @@ class ParticipantsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @param integer $event
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionCreate($event)
     {
