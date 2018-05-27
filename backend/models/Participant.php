@@ -84,6 +84,16 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasOne(Schools::className(), ['id' => 'schoolId']);
     }
 
+    public function getSchoolName()
+    {
+        if ($this->schoolId === null) {
+            return $this->schoolName;
+        }
+
+        $school = $this->school;
+        return $school ? $school->name : '';
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
