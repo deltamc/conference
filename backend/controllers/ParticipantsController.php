@@ -85,7 +85,14 @@ class ParticipantsController extends Controller
             if (isset($post['Participant']['names']['name'])) {
                 $names = $post['Participant']['names']['name'];
             }
+
+            $teachers = [];
+            if (isset($post['Participant']['teachers']['name'])) {
+                $teachers = $post['Participant']['teachers']['name'];
+            }
+
             $model->saveNames($names);
+            $model->saveTeachers($teachers);
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -113,7 +120,7 @@ class ParticipantsController extends Controller
 
         $schools = ArrayHelper::map(Schools::find()->all(), 'id', 'name');
 
-        $schools[0] = 'Другая';
+        $schools[0] = 'Другое';
 
         if ($model->load($post) && $model->save()) {
 
@@ -121,7 +128,13 @@ class ParticipantsController extends Controller
             if (isset($post['Participant']['names']['name'])) {
                 $names = $post['Participant']['names']['name'];
             }
+
+            $teachers = [];
+            if (isset($post['Participant']['teachers']['name'])) {
+                $teachers = $post['Participant']['teachers']['name'];
+            }
             $model->saveNames($names);
+            $model->saveTeachers($teachers);
 
             return $this->redirect(['view', 'id' => $model->id]);
         }

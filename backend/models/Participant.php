@@ -55,12 +55,13 @@ class Participant extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'schoolId' => 'School ID',
-            'schoolName' => 'School Name',
-            'additionalSchool' => 'Additional School',
-            'class' => 'Class',
-            'theme' => 'Theme',
-            'contacts' => 'Contacts',
+            'schoolId' => 'Наименование учебного заведения:',
+            'schoolName' => 'Наименование учебного заведения:',
+            'additionalSchool' => 'Учреждение дополнительного образования',
+            'class' => 'Класс (курс)',
+            'theme' => 'Тема работы',
+            'sectionId' => 'Секция',
+            'contacts' => 'Телефон и (или) адрес электронной почты',
 
         ];
     }
@@ -107,6 +108,21 @@ class Participant extends \yii\db\ActiveRecord
         foreach ($names as $name)
         {
             $model = new Name();
+            $model->name = $name;
+            $model->participantId = $this->id;
+            $model->save();
+        }
+
+        return true;
+    }
+
+    public function saveTeachers(array $names)
+    {
+        Teacher::deleteAll(['participantId' => $this->id]);
+
+        foreach ($names as $name)
+        {
+            $model = new Teacher();
             $model->name = $name;
             $model->participantId = $this->id;
             $model->save();
