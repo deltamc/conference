@@ -42,6 +42,11 @@ class ParticipantsController extends Controller
     public function actionIndex($event)
     {
         $eventModel = Events::findOne($event);
+
+        if ($eventModel === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
         $dataProvider = new ActiveDataProvider([
             'query' => Participant::find(),
         ]);
@@ -52,18 +57,7 @@ class ParticipantsController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Participant model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+
 
     /**
      * Creates a new Participant model.
@@ -74,6 +68,11 @@ class ParticipantsController extends Controller
     public function actionCreate($event)
     {
         $eventModel = Events::findOne($event);
+
+        if ($eventModel === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
         $model = new Participant();
         $post = Yii::$app->request->post();
 
@@ -115,6 +114,11 @@ class ParticipantsController extends Controller
     public function actionUpdate($id, $event)
     {
         $eventModel = Events::findOne($event);
+
+        if ($eventModel === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
         $model = $this->findModel($id);
         $post = Yii::$app->request->post();
 
