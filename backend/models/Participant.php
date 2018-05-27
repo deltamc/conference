@@ -77,17 +77,17 @@ class Participant extends \yii\db\ActiveRecord
     {
 
         $sectionsThis = Section::findOne($this->sectionId);
-        $out = $sectionsThis->name . $separator;
+
         $sections = Section::find()
             ->andWhere(['eventId'=>$this->eventId])
-            ->andWhere(['>', 'lft', $sectionsThis->lft ])
-            ->andWhere(['<', 'rgt', $sectionsThis->rgt ])
+            ->andWhere(['<', 'lft', $sectionsThis->lft ])
+            ->andWhere(['>', 'rgt', $sectionsThis->rgt ])
             ->addOrderBy('lft')->all();
-
+        $out = '';
         foreach ($sections as $item) {
             $out .= $item->name . $separator;
         }
-
+        $out .= $sectionsThis->name;
         $out = trim($out, $separator);
 
         return $out;
