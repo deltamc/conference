@@ -6,7 +6,6 @@ use yii\helpers\Html;
 /* @var $model backend\models\Events */
 
 $this->title = '';
-$this->params['breadcrumbs'][] = ['label' => 'Мероприятия', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>

@@ -8,7 +8,6 @@ use  kartik\tree\Module;
 use yii\helpers\Url;
 
 $this->title = 'Секции';
-$this->params['breadcrumbs'][] = ['label'=>'Мероприятия', 'url'=>['/events']];
 $this->params['breadcrumbs'][] = $event->name;
 $this->params['breadcrumbs'][] = $this->title;
 
