@@ -48,7 +48,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
             'rules' => [
-                //'/' => 'site/login',
+                '/' => 'events',
 
             ],
         ],
