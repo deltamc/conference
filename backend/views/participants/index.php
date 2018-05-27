@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -30,7 +30,27 @@ $this->params['breadcrumbs'][] = $this->title;
             //'theme',
             //'contacts',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'delete' => function($url, $model, $key)  use ($eventModel) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-trash"></span>',
+                            Url::to(['delete', 'id' => $model->id, 'event' => $eventModel->id]),
+                            [
+                                'data-confirm' => 'Удалить?',
+                            ]
+                        );
+                    },
+                    'update' => function($url, $model, $key) use ($eventModel) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-pencil"></span>',
+                            Url::to(['update', 'id' => $model->id, 'event' => $eventModel->id])
+                        );
+                    }
+                ],
+            ],
         ],
     ]); ?>
 </div>

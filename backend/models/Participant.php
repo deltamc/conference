@@ -38,10 +38,11 @@ class Participant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['schoolId', 'class', 'theme'], 'required'],
-            [['schoolId'], 'integer'],
+            [['schoolId', 'class', 'theme', 'sectionId'], 'required'],
+            [['schoolId', 'sectionId'], 'integer'],
             [['schoolName', 'additionalSchool', 'class', 'theme', 'contacts'], 'string', 'max' => 255],
-            [['schoolId'], 'exist', 'skipOnError' => true, 'targetClass' => Schools::className(), 'targetAttribute' => ['schoolId' => 'id']],
+            //[['schoolId'], 'exist', 'skipOnError' => true, 'targetClass' => Schools::className(), 'targetAttribute' => ['schoolId' => 'id']],
+
 
 
         ];
@@ -72,6 +73,8 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasMany(Name::className(), ['participantId' => 'id']);
     }
 
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -99,7 +102,7 @@ class Participant extends \yii\db\ActiveRecord
 
     public function saveNames(array $names)
     {
-        //Name::deleteAll(['participantId' => $this->id]);
+        Name::deleteAll(['participantId' => $this->id]);
 
         foreach ($names as $name)
         {
@@ -110,5 +113,19 @@ class Participant extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert)
+    {
+        $result = parent::beforeSave($insert);
+
+        if ((int) $this->schoolId === 0) {
+            $this->schoolId = null;
+        }
+
+        return $result;
     }
 }

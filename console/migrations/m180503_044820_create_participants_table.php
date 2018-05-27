@@ -14,12 +14,13 @@ class m180503_044820_create_participants_table extends Migration
     {
         $this->createTable('{{%participants}}', [
             'id'               => $this->primaryKey(),
-            'schoolId'         => $this->integer()->notNull(),
+            'schoolId'         => $this->integer()->null(),
             'schoolName'       => $this->string()->null(),
             'additionalSchool' => $this->string()->null(),
             'class'            => $this->string()->notNull(),
             'theme'            => $this->string()->notNull(),
             'contacts'         => $this->string()->null(),
+            'sectionId'        => $this->integer()->notNull(),
         ]);
 
         $this->addForeignKey(
