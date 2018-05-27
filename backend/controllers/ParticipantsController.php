@@ -49,7 +49,7 @@ class ParticipantsController extends Controller
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Participant::find(),
+            'query' => Participant::find()->andWhere(['eventId' => $eventModel->id]),
         ]);
 
         return $this->render('index', [
@@ -76,6 +76,7 @@ class ParticipantsController extends Controller
         }
 
         $model = new Participant();
+        $model->eventId = $eventModel->id;
         $post = Yii::$app->request->post();
 
         $schools = ArrayHelper::map(Schools::find()->all(), 'id', 'name');
@@ -123,6 +124,7 @@ class ParticipantsController extends Controller
         }
 
         $model = $this->findModel($id);
+        $model->eventId = $eventModel->id;
         $post = Yii::$app->request->post();
 
         $schools = ArrayHelper::map(Schools::find()->all(), 'id', 'name');
