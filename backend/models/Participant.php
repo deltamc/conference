@@ -144,4 +144,13 @@ class Participant extends \yii\db\ActiveRecord
 
         return $result;
     }
+    /**
+     * {@inheritdoc}
+     */
+    public function delete()
+    {
+        Name::deleteAll(['participantId' => $this->id]);
+        Teacher::deleteAll(['participantId' => $this->id]);
+        parent::delete();
+    }
 }
