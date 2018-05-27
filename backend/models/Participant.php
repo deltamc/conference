@@ -74,7 +74,15 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasMany(Name::className(), ['participantId' => 'id']);
     }
 
+    public function getNamesList()
+    {
+        $out = '';
+        foreach ($this->names as $item) {
+            $out .= $item->name . '<br />';
+        }
 
+        return $out;
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -100,6 +108,16 @@ class Participant extends \yii\db\ActiveRecord
     public function getTeachers()
     {
         return $this->hasMany(Teacher::className(), ['participantId' => 'id']);
+    }
+
+    public function getTeachersList()
+    {
+        $out = '';
+        foreach ($this->teachers as $item) {
+            $out .= $item->name . '<br />';
+        }
+
+        return $out;
     }
 
     /**
