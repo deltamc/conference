@@ -41,9 +41,7 @@ class Participant extends \yii\db\ActiveRecord
             [['schoolId', 'class', 'theme', 'sectionId'], 'required'],
             [['schoolId', 'sectionId'], 'integer'],
             [['schoolName', 'additionalSchool', 'class', 'theme', 'contacts'], 'string', 'max' => 255],
-            //[['schoolId'], 'exist', 'skipOnError' => true, 'targetClass' => Schools::className(), 'targetAttribute' => ['schoolId' => 'id']],
-
-
+            ['eventId', 'safe']
 
         ];
     }
@@ -72,6 +70,27 @@ class Participant extends \yii\db\ActiveRecord
     public function getNames()
     {
         return $this->hasMany(Name::className(), ['participantId' => 'id']);
+    }
+
+
+    public function getSection($separator = ' / ')
+    {
+
+        $sectionsThis = Section::findOne($this->sectionId);
+        $out = $sectionsThis->name . $separator;
+        $sections = Section::find()
+            ->andWhere(['eventId'=>$this->eventId])
+            ->andWhere(['>', 'lft', $sectionsThis->lft ])
+            ->andWhere(['<', 'rgt', $sectionsThis->rgt ])
+            ->addOrderBy('lft')->all();
+
+        foreach ($sections as $item) {
+            $out .= $item->name . $separator;
+        }
+
+        $out = trim($out, $separator);
+
+        return $out;
     }
 
     public function getNamesList()

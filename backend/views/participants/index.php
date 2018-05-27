@@ -15,22 +15,48 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Participant', ['create', 'event' => $eventModel->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить участника', ['create', 'event' => $eventModel->id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'schoolId',
-            'schoolName',
-            'additionalSchool',
+            [
+                'label' => 'Ф.И.О',
+                'content' => function($model) {
+                    return $model->getNamesList();
+                }
+            ],
+            'theme',
+            [
+                'label' => 'Учебное заведение',
+                'content' => function($model) {
+                    return $model->getSchoolName();
+                }
+            ],
+            [
+                'label' => 'Секция',
+                'content' => function($model) {
+                    return $model->getSection();
+                }
+            ],
+            [
+                'attribute' => 'additionalSchool',
+                'label'     => 'Учереждение ДО'
+            ],
             'class',
             //'theme',
             //'contacts',
-
+            [
+                'label' => 'Ф.И.О Педагогов',
+                'content' => function($model) {
+                    return $model->getTeachersList();
+                }
+            ],
+            [
+                'attribute' => 'contacts',
+                'label'     => 'Телефон, эл. почта'
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
