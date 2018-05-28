@@ -149,10 +149,9 @@ class ParticipantsController extends Controller
         }
 
         return $this->render('update', [
-            'model'   => $model,
-            'schools' => $schools,
+            'model'      => $model,
+            'schools'    => $schools,
             'eventModel' => $eventModel,
-
         ]);
     }
 
