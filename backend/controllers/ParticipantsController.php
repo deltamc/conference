@@ -44,12 +44,19 @@ class ParticipantsController extends Controller
     {
         $eventModel = Events::findOne($event);
 
+        $section = (int) yii::$app->request->get('section', null);
+
+
         if ($eventModel === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-
+        $pq = Participant::find()->andWhere(['eventId' => $eventModel->id]);
+        if ($section != null) {
+            $pq->andWhere(['sectionId' => $section]);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => Participant::find()->andWhere(['eventId' => $eventModel->id]),
+            'query' => $pq,
+            'sort' =>false,
         ]);
 
         return $this->render('index', [
