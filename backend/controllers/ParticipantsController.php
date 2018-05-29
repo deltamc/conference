@@ -67,6 +67,10 @@ class ParticipantsController extends Controller
     }
 
 
+    public function actionExcl($event, $section=0)
+    {
+
+    }
 
     /**
      * Creates a new Participant model.

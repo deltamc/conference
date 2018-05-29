@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Сохранить в Excel', ['exel', 'event' => $eventModel->id, 'section'=>$section], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Сохранить в Excel', ['excel', 'event' => $eventModel->id, 'section'=>$section], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Добавить участника', ['create', 'event' => $eventModel->id], ['class' => 'btn btn-success']) ?>
     </p>
 
