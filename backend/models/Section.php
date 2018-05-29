@@ -46,4 +46,27 @@ class Section extends \kartik\tree\models\Tree
         return $attributes;
     }
 
+
+    /**
+     *
+     * @param string $separator
+     * @return string
+     */
+    public function breadcrumbs($separator = ' / ')
+    {
+        $sections = Section::find()
+            ->andWhere(['eventId' => $this->eventId])
+            ->andWhere(['<', 'lft', $this->lft ])
+            ->andWhere(['>', 'rgt', $this->rgt ])
+            ->addOrderBy('lft')->all();
+        $out = '';
+        foreach ($sections as $item) {
+            $out .= $item->name . $separator;
+        }
+        $out .= $this->name;
+        $out = trim($out, $separator);
+
+        return $out;
+    }
+
 }
