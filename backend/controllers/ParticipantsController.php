@@ -62,6 +62,7 @@ class ParticipantsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'eventModel'   => $eventModel,
+            'section'      => $section,
         ]);
     }
 

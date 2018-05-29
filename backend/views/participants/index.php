@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'asDropdown' => true,
             'multiple' => false,
             'options' => ['disabled' => false],
-            'value' => yii::$app->request->get('section', null)
+            'value' => $section
         ]) ?>
         </div>
         <div class="col-md-6" style="line-height: 30px;">
@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('Сохранить в Excel', ['exel', 'event' => $eventModel->id, 'section'=>$section], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Добавить участника', ['create', 'event' => $eventModel->id], ['class' => 'btn btn-success']) ?>
     </p>
 
