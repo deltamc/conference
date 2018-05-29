@@ -67,7 +67,7 @@ class ParticipantsController extends Controller
     }
 
 
-    public function actionExcl($event, $section=0)
+    public function actionExcel($event, $section=0)
     {
 
     }
