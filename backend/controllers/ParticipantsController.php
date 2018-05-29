@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Participant;
 use backend\models\Schools;
+use backend\models\Section;
 use backend\models\Events;
 use backend\models\Name;
 use yii\data\ActiveDataProvider;
@@ -13,6 +14,9 @@ use yii\web\NotFoundHttpException;
 use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;
 use yii\base\Model;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
  * ParticipantController implements the CRUD actions for Participant model.
@@ -37,21 +41,21 @@ class ParticipantsController extends Controller
     /**
      * Lists all Participant models.
      * @param integer $event
+     * @param integer $section
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionIndex($event)
+    public function actionIndex($event, $section = 0)
     {
         $eventModel = Events::findOne($event);
-
-        $section = (int) yii::$app->request->get('section', null);
 
 
         if ($eventModel === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
         $pq = Participant::find()->andWhere(['eventId' => $eventModel->id]);
-        if ($section != null) {
+        if ((int) $section !== 0) {
             $pq->andWhere(['sectionId' => $section]);
         }
         $dataProvider = new ActiveDataProvider([
@@ -66,10 +70,54 @@ class ParticipantsController extends Controller
         ]);
     }
 
-
-    public function actionExcel($event, $section=0)
+    /**
+     * Save to Excel
+     * @param $event
+     * @param int $section
+     */
+    public function actionExcel($event, $section = 0)
     {
+        $section = (int) $section;
+        $eventModel = Events::findOne($event);
 
+        if ($eventModel === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        $sectionName = '';
+        $pq = Participant::find()->andWhere(['eventId' => $eventModel->id]);
+        if ($section !== 0) {
+            $pq->andWhere(['sectionId' => $section]);
+            $sectionName = Section::findOne($section)->breadcrumbs();
+        }
+        $participants = $pq->all();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', $eventModel->name);
+        $sheet->setCellValue('A2', $sectionName);
+
+        $sheet->setCellValue('A3', '№');
+        $sheet->setCellValue('B3', 'Образовательное учреждение');
+        $sheet->setCellValue('C3', 'Тема работы');
+        $sheet->setCellValue('D3', 'Руководитель');
+        $sheet->setCellValue('E3', 'Результат');
+
+        $row = 3;
+        foreach ($participants as $participant) {
+
+        }
+
+
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
+        $fileName = $eventModel->name . ' ' . $section . '.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $fileName . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 
     /**
